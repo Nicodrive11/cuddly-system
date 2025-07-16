@@ -1,3 +1,4 @@
+"use client"
 import React, { useState, useEffect } from 'react';
 import { ExternalLink, Moon, Sun } from 'lucide-react';
 
@@ -125,39 +126,39 @@ const WebAppGallery = () => {
     <div 
       className="group relative"
       style={{
-        animationDelay: `${index * 0.1}s`
+        animationDelay: `${index * 0.05}s`
       }}
     >
       <a 
         href={project.liveUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="block relative overflow-hidden rounded-3xl bg-white/80 dark:bg-gray-800/50 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 shadow-lg dark:shadow-gray-900/20 transition-all duration-700 ease-out hover:shadow-2xl hover:shadow-gray-400/20 dark:hover:shadow-gray-900/40 hover:-translate-y-2 hover:scale-105"
+        className="block relative overflow-hidden rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5"
       >
         <div className="aspect-square relative overflow-hidden">
           <img 
             src={project.image} 
             alt={project.title}
-            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
           {project.featured && (
-            <div className="absolute top-3 left-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-2 py-1 rounded-full text-xs font-medium tracking-wide">
-              Featured
+            <div className="absolute top-1.5 left-1.5 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-1.5 py-0.5 rounded text-xs font-medium">
+              ★
             </div>
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0">
-            <div className="w-8 h-8 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center">
-              <ExternalLink className="w-4 h-4 text-white" />
+          <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute bottom-1.5 right-1.5 opacity-0 group-hover:opacity-100 transition-all duration-300">
+            <div className="w-5 h-5 bg-white/90 rounded-full flex items-center justify-center">
+              <ExternalLink className="w-2.5 h-2.5 text-gray-700" />
             </div>
           </div>
         </div>
         
-        <div className="p-3">
-          <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-1 tracking-tight">
+        <div className="p-2">
+          <h3 className="text-xs font-medium text-gray-900 dark:text-white truncate">
             {project.title}
           </h3>
-          <p className="text-gray-600 dark:text-gray-300 text-xs leading-relaxed font-light line-clamp-2">
+          <p className="text-gray-600 dark:text-gray-300 text-xs leading-tight line-clamp-1 mt-0.5">
             {project.description}
           </p>
         </div>
@@ -168,27 +169,27 @@ const WebAppGallery = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-500">
       {/* Dark Mode Toggle */}
-      <div className="fixed top-8 right-8 z-50">
+      <div className="fixed top-4 right-4 z-50">
         <button
           onClick={toggleDarkMode}
-          className="w-12 h-12 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 shadow-lg dark:shadow-gray-900/20 flex items-center justify-center transition-all duration-300 hover:shadow-xl hover:scale-105"
+          className="w-10 h-10 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md flex items-center justify-center transition-all duration-200"
         >
           {darkMode ? (
-            <Sun className="w-5 h-5 text-yellow-500" />
+            <Sun className="w-4 h-4 text-yellow-500" />
           ) : (
-            <Moon className="w-5 h-5 text-gray-700" />
+            <Moon className="w-4 h-4 text-gray-600" />
           )}
         </button>
       </div>
 
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-40 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-700/50">
-        <div className="max-w-7xl mx-auto px-6 py-4">
+      <nav className="fixed top-0 left-0 right-0 z-40 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200/20 dark:border-gray-700/20">
+        <div className="max-w-7xl mx-auto px-6 py-3">
           <div className="flex items-center justify-between">
-            <div className="text-xl font-semibold text-gray-900 dark:text-white tracking-tight">
+            <div className="text-lg font-medium text-gray-900 dark:text-white">
               Portfolio
             </div>
-            <div className="text-sm text-gray-600 dark:text-gray-300 font-light">
+            <div className="text-sm text-gray-500 dark:text-gray-400">
               Masters of Software Development
             </div>
           </div>
@@ -196,15 +197,15 @@ const WebAppGallery = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <h1 className="text-5xl md:text-7xl font-light text-gray-900 dark:text-white mb-6 tracking-tight leading-tight">
+      <section className="pt-20 pb-12">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h1 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-4 tracking-tight">
             Crafted with
             <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent font-medium">
               precision.
             </span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 font-light max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg text-gray-600 dark:text-gray-300 font-light max-w-2xl mx-auto">
             A collection of applications that demonstrate innovation, 
             technical excellence, and thoughtful design.
           </p>
@@ -212,9 +213,9 @@ const WebAppGallery = () => {
       </section>
 
       {/* Apps Grid */}
-      <section className="pb-32">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
+      <section className="pb-16">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-3">
             {projects.map((project, index) => (
               <AppButton key={project.id} project={project} index={index} />
             ))}
@@ -223,10 +224,10 @@ const WebAppGallery = () => {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200/50 dark:border-gray-700/50 bg-white/50 dark:bg-gray-900/50 backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-6 py-12">
+      <footer className="border-t border-gray-200/30 dark:border-gray-700/30 bg-gray-50/50 dark:bg-gray-900/50">
+        <div className="max-w-6xl mx-auto px-6 py-8">
           <div className="text-center">
-            <p className="text-gray-600 dark:text-gray-400 font-light">
+            <p className="text-gray-500 dark:text-gray-400 text-sm">
               © 2024 Portfolio. Designed and developed with passion.
             </p>
           </div>
