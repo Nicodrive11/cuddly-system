@@ -1,257 +1,275 @@
 "use client"
-import React, { useState, useEffect } from 'react';
-import { ExternalLink, Moon, Sun } from 'lucide-react';
+import React from 'react';
+import Link from 'next/link';
 
 const WebAppGallery = () => {
-  const [darkMode, setDarkMode] = useState(() => {
-    // Check for saved theme preference or default to light mode
-    if (typeof window !== 'undefined') {
-      const savedTheme = window.localStorage?.getItem('theme');
-      return savedTheme === 'dark';
-    }
-    return false;
-  });
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
-
-  const toggleDarkMode = () => {
-    const newDarkMode = !darkMode;
-    setDarkMode(newDarkMode);
-    if (typeof window !== 'undefined') {
-      window.localStorage?.setItem('theme', newDarkMode ? 'dark' : 'light');
-    }
-  };
-
-  // Sample data - replace with your actual projects
   const projects = [
     {
       id: 1,
-      title: "E-Commerce Platform",
-      description: "Full-stack e-commerce solution with seamless payment integration and modern design.",
-      image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=400&fit=crop",
-      liveUrl: "https://example.com/ecommerce",
-      technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-      category: "Full Stack",
-      featured: true
+      title: "Mobile APP (coming soon)",
+      image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=400&fit=crop",
+      liveUrl: "https://example.com/OnlyTrailers",
     },
     {
       id: 2,
-      title: "Task Management",
-      description: "Collaborative workspace with real-time updates and intuitive drag-and-drop interface.",
-      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=400&fit=crop",
+      title: "Task Management App (coming soon)", 
+      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop",
       liveUrl: "https://example.com/taskmanager",
-      technologies: ["React", "TypeScript", "Socket.io"],
-      category: "Frontend",
-      featured: false
     },
     {
       id: 3,
-      title: "Weather Dashboard",
-      description: "Real-time weather insights with beautiful visualizations and location-based forecasts.",
-      image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=400&h=400&fit=crop",
-      liveUrl: "https://example.com/weather",
-      technologies: ["React", "OpenWeather API", "Chart.js"],
-      category: "Frontend",
-      featured: true
+      title: "Rock Paper Scissors (coming soon)",
+      image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&h=400&fit=crop", 
+      liveUrl: "https://example.com/RPS",
     },
     {
       id: 4,
-      title: "Analytics Suite",
-      description: "Comprehensive analytics dashboard with advanced data visualization and reporting.",
-      image: "https://images.unsplash.com/photo-1611262588024-d12430b98920?w=400&h=400&fit=crop",
-      liveUrl: "https://example.com/analytics",
-      technologies: ["React", "D3.js", "Express"],
-      category: "Data Visualization",
-      featured: false
+      title: "Wordle Game (coming soon)",
+      image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&h=400&fit=crop",
+      liveUrl: "https://example.com/Wordz", 
     },
     {
       id: 5,
-      title: "Learning Platform",
-      description: "Educational ecosystem with interactive courses and personalized learning paths.",
-      image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=400&h=400&fit=crop",
-      liveUrl: "https://example.com/lms",
-      technologies: ["React", "Node.js", "MySQL"],
-      category: "Full Stack",
-      featured: true
+      title: "Tick Tac Toe Game (coming soon)",
+      image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&h=400&fit=crop",
+      liveUrl: "https://example.com/TTT",
     },
     {
       id: 6,
-      title: "Recipe Discovery",
-      description: "Intelligent recipe finder with meal planning and personalized recommendations.",
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop",
-      liveUrl: "https://example.com/recipes",
-      technologies: ["React", "Firebase", "API"],
-      category: "Frontend",
-      featured: false
+      title: "WebSocket Game (coming soon)",
+      image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&h=400&fit=crop",
+      liveUrl: "https://example.com/websocket-game",
     },
     {
       id: 7,
-      title: "Portfolio Studio",
-      description: "Creative portfolio builder with stunning templates and seamless customization.",
-      image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400&h=400&fit=crop",
-      liveUrl: "https://example.com/portfolio",
-      technologies: ["React", "Tailwind", "Framer Motion"],
-      category: "Frontend",
-      featured: false
+      title: "Music Player (coming soon)",
+      image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=400&fit=crop",
+      liveUrl: "https://example.com/music-player",
     },
     {
       id: 8,
-      title: "Chat Application",
-      description: "Real-time messaging platform with file sharing and group collaboration features.",
-      image: "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=400&h=400&fit=crop",
-      liveUrl: "https://example.com/chat",
-      technologies: ["React", "Socket.io", "Node.js"],
-      category: "Full Stack",
-      featured: false
-    },
-    {
-      id: 9,
-      title: "Expense Tracker",
-      description: "Smart financial management with automated categorization and insightful analytics.",
-      image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=400&fit=crop",
-      liveUrl: "https://example.com/expenses",
-      technologies: ["React", "Chart.js", "API"],
-      category: "Frontend",
-      featured: true
+      title: "Recipe App (coming soon)",
+      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop",
+      liveUrl: "https://example.com/recipe-app",
     }
   ];
 
-  const AppButton = ({ project, index }) => (
+  return (
     <div 
-      className="group relative"
+      className="min-h-screen bg-cover bg-center bg-no-repeat"
       style={{
-        animationDelay: `${index * 0.05}s`
+        backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop')`
       }}
     >
-      <a 
-        href={project.liveUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block relative overflow-hidden rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5"
-      >
-        <div className="aspect-square relative overflow-hidden">
-          <img 
-            src={project.image} 
-            alt={project.title}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-          />
-          {project.featured && (
-            <div className="absolute top-1.5 left-1.5 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-1.5 py-0.5 rounded text-xs font-medium">
-              ★
-            </div>
-          )}
-          <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          <div className="absolute bottom-1.5 right-1.5 opacity-0 group-hover:opacity-100 transition-all duration-300">
-            <div className="w-5 h-5 bg-white/90 rounded-full flex items-center justify-center">
-              <ExternalLink className="w-2.5 h-2.5 text-gray-700" />
-            </div>
-          </div>
-        </div>
-        
-        <div className="p-2">
-          <h3 className="text-xs font-medium text-gray-900 dark:text-white truncate">
-            {project.title}
-          </h3>
-          <p className="text-gray-600 dark:text-gray-300 text-xs leading-tight line-clamp-1 mt-0.5">
-            {project.description}
-          </p>
-        </div>
-      </a>
-    </div>
-  );
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-500">
-      {/* Dark Mode Toggle */}
-      <div className="fixed top-4 right-4 z-50">
-        <button
-          onClick={toggleDarkMode}
-          className="w-10 h-10 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md flex items-center justify-center transition-all duration-200"
+      {/* Navigation */}
+      <div className="text-center py-6 text-gray-300 text-sm uppercase tracking-widest">
+        <span className="text-white">HOME</span>
+        <span className="mx-2">/</span>
+        <Link href="/about" className="hover:text-white transition-colors">
+          ABOUT NICO
+        </Link>
+        <span className="mx-2">/</span>
+        <a 
+          href="https://www.linkedin.com/in/nicolas-saldana-a095291b4/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="hover:text-white transition-colors"
         >
-          {darkMode ? (
-            <Sun className="w-4 h-4 text-yellow-500" />
-          ) : (
-            <Moon className="w-4 h-4 text-gray-600" />
-          )}
-        </button>
+          LINKEDIN
+        </a>
       </div>
 
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-40 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200/20 dark:border-gray-700/20">
-        <div className="max-w-7xl mx-auto px-6 py-3">
-          <div className="flex items-center justify-between">
-            <div className="text-lg font-medium text-gray-900 dark:text-white">
-              Portfolio
-            </div>
-            <div className="text-sm text-gray-500 dark:text-gray-400">
-              Masters of Software Development
-            </div>
-          </div>
-        </div>
-      </nav>
-
       {/* Hero Section */}
-      <section className="pt-20 pb-12">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-4 tracking-tight">
-            Crafted with
-            <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent font-medium">
-              precision.
-            </span>
-          </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300 font-light max-w-2xl mx-auto">
-            A collection of applications that demonstrate innovation, 
-            technical excellence, and thoughtful design.
-          </p>
-        </div>
-      </section>
+      <div className="text-center py-2">
+      </div>
 
-      {/* Apps Grid */}
-      <section className="pb-16">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-3">
-            {projects.map((project, index) => (
-              <AppButton key={project.id} project={project} index={index} />
-            ))}
+      {/* Projects Grid */}
+      <div className="max-w-5xl mx-auto px-8">
+        {/* Row 1 - Three large tiles */}
+        <div className="flex gap-6 mb-6">
+          <a 
+            href={projects[0]?.liveUrl}
+            className="flex-1 h-48 relative overflow-hidden group hover:scale-[1.02] transition-all duration-300 ease-out"
+            style={{ borderRadius: '22px' }}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img 
+              src={projects[0]?.image} 
+              alt={projects[0]?.title}
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:from-black/70 transition-all duration-300"></div>
+            <div className="absolute bottom-4 left-4 text-white">
+              <h3 className="text-lg font-medium tracking-tight">{projects[0]?.title}</h3>
+            </div>
+            <div className="absolute inset-0 shadow-lg group-hover:shadow-2xl transition-shadow duration-300"></div>
+          </a>
+          
+          <a 
+            href={projects[1]?.liveUrl}
+            className="flex-1 h-48 relative overflow-hidden group hover:scale-[1.02] transition-all duration-300 ease-out"
+            style={{ borderRadius: '22px' }}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img 
+              src={projects[1]?.image} 
+              alt={projects[1]?.title}
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:from-black/70 transition-all duration-300"></div>
+            <div className="absolute bottom-4 left-4 text-white">
+              <h3 className="text-lg font-medium tracking-tight">{projects[1]?.title}</h3>
+            </div>
+            <div className="absolute inset-0 shadow-lg group-hover:shadow-2xl transition-shadow duration-300"></div>
+          </a>
+          
+          <a 
+            href={projects[2]?.liveUrl}
+            className="flex-1 h-48 relative overflow-hidden group hover:scale-[1.02] transition-all duration-300 ease-out"
+            style={{ borderRadius: '22px' }}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img 
+              src={projects[2]?.image} 
+              alt={projects[2]?.title}
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:from-black/70 transition-all duration-300"></div>
+            <div className="absolute bottom-4 left-4 text-white">
+              <h3 className="text-lg font-medium tracking-tight">{projects[2]?.title}</h3>
+            </div>
+            <div className="absolute inset-0 shadow-lg group-hover:shadow-2xl transition-shadow duration-300"></div>
+          </a>
+        </div>
+
+        {/* Row 2 - Three medium tiles */}
+        <div className="flex gap-6 mb-6">
+          <a 
+            href={projects[3]?.liveUrl}
+            className="flex-1 h-44 relative overflow-hidden group hover:scale-[1.02] transition-all duration-300 ease-out"
+            style={{ borderRadius: '20px' }}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img 
+              src={projects[3]?.image} 
+              alt={projects[3]?.title}
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:from-black/70 transition-all duration-300"></div>
+            <div className="absolute bottom-4 left-4 text-white">
+              <h3 className="text-lg font-medium tracking-tight">{projects[3]?.title}</h3>
+            </div>
+            <div className="absolute inset-0 shadow-lg group-hover:shadow-2xl transition-shadow duration-300"></div>
+          </a>
+          
+          <a 
+            href={projects[4]?.liveUrl}
+            className="flex-1 h-44 relative overflow-hidden group hover:scale-[1.02] transition-all duration-300 ease-out"
+            style={{ borderRadius: '20px' }}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img 
+              src={projects[4]?.image} 
+              alt={projects[4]?.title}
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:from-black/70 transition-all duration-300"></div>
+            <div className="absolute bottom-4 left-4 text-white">
+              <h3 className="text-lg font-medium tracking-tight">{projects[4]?.title}</h3>
+            </div>
+            <div className="absolute inset-0 shadow-lg group-hover:shadow-2xl transition-shadow duration-300"></div>
+          </a>
+          
+          <a 
+            href={projects[5]?.liveUrl}
+            className="flex-1 h-44 relative overflow-hidden group hover:scale-[1.02] transition-all duration-300 ease-out"
+            style={{ borderRadius: '20px' }}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img 
+              src={projects[5]?.image} 
+              alt={projects[5]?.title}
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:from-black/70 transition-all duration-300"></div>
+            <div className="absolute bottom-4 left-4 text-white">
+              <h3 className="text-lg font-medium tracking-tight">{projects[5]?.title}</h3>
+            </div>
+            <div className="absolute inset-0 shadow-lg group-hover:shadow-2xl transition-shadow duration-300"></div>
+          </a>
+        </div>
+
+        {/* Row 3 - Two images + one text tile */}
+        <div className="flex gap-6 mb-12">
+          <a 
+            href={projects[6]?.liveUrl}
+            className="flex-1 h-40 relative overflow-hidden group hover:scale-[1.02] transition-all duration-300 ease-out"
+            style={{ borderRadius: '18px' }}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img 
+              src={projects[6]?.image} 
+              alt={projects[6]?.title}
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:from-black/70 transition-all duration-300"></div>
+            <div className="absolute bottom-4 left-4 text-white">
+              <h3 className="text-lg font-medium tracking-tight">{projects[6]?.title}</h3>
+            </div>
+            <div className="absolute inset-0 shadow-lg group-hover:shadow-2xl transition-shadow duration-300"></div>
+          </a>
+          
+          <a 
+            href={projects[7]?.liveUrl}
+            className="flex-1 h-40 relative overflow-hidden group hover:scale-[1.02] transition-all duration-300 ease-out"
+            style={{ borderRadius: '18px' }}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img 
+              src={projects[7]?.image} 
+              alt={projects[7]?.title}
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:from-black/70 transition-all duration-300"></div>
+            <div className="absolute bottom-4 left-4 text-white">
+              <h3 className="text-lg font-medium tracking-tight">{projects[7]?.title}</h3>
+            </div>
+            <div className="absolute inset-0 shadow-lg group-hover:shadow-2xl transition-shadow duration-300"></div>
+          </a>
+          
+          {/* Text only tile */}
+          <div 
+            className="flex-1 h-40 bg-white bg-opacity-95 backdrop-blur-sm flex flex-col justify-center px-6 hover:scale-[1.02] transition-all duration-300 ease-out hover:shadow-2xl"
+            style={{ borderRadius: '18px' }}
+          >
+            <div className="text-gray-500 text-xs mb-2 uppercase tracking-wider font-medium">
+              August 2025
+            </div>
+            <h3 className="text-gray-900 text-lg font-semibold leading-tight tracking-tight">
+              MORE PROJECTS<br />
+              COMING SOON
+            </h3>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200/30 dark:border-gray-700/30 bg-gray-50/50 dark:bg-gray-900/50">
-        <div className="max-w-6xl mx-auto px-6 py-8">
-          <div className="text-center">
-            <p className="text-gray-500 dark:text-gray-400 text-sm">
-              © 2024 Portfolio. Designed and developed with passion.
-            </p>
-          </div>
+      <div className="text-center pb-8">
+        <div className="text-white text-lg font-light mb-2">
+          © 2025 NICO
         </div>
-      </footer>
-
-      {/* Custom Styles */}
-      <style jsx>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        .group {
-          animation: fadeInUp 0.6s ease-out forwards;
-          opacity: 0;
-        }
-      `}</style>
+        <div className="text-gray-400 text-sm uppercase tracking-wider">
+          PORTFOLIO BY NICOLAS SALDANA
+        </div>
+      </div>
     </div>
   );
 };
