@@ -1,0 +1,186 @@
+body{
+    background-color: black;
+}
+
+/* Home Button Styles */
+.home-button-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.home-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid blanchedalmond;
+    color: blanchedalmond;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+}
+
+.home-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: white;
+    color: white;
+    transform: translateY(-2px);
+}
+
+h1{
+    text-align: center;  
+    color: blanchedalmond;
+}
+
+input{
+    width: 50px;
+    height: 50px;
+    text-align: center; 
+}
+
+button{
+    color: blanchedalmond;
+    background-color: black;
+}
+
+.rows{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ten{
+    color: blanchedalmond;
+    background-color: black;
+    width: 55px;
+    height: 55px;
+    text-align: center;
+    border: 2px solid blanchedalmond;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.twenty{
+    color: blanchedalmond;
+    background-color: black;
+    width: 55px;
+    height: 55px;
+    text-align: center;
+    border: 2px solid blanchedalmond;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.thirty{
+    color: blanchedalmond;
+    background-color: black;
+    width: 55px;
+    height: 55px;
+    text-align: center;
+    border: 2px solid blanchedalmond;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.fourty{
+    color: blanchedalmond;
+    background-color: black;
+    width: 55px;
+    height: 55px;
+    text-align: center;
+    border: 2px solid blanchedalmond;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.fitty{
+    color: blanchedalmond;
+    background-color: black;
+    width: 55px;
+    height: 55px;
+    text-align: center;
+    border: 2px solid blanchedalmond;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.sixty{
+    color: blanchedalmond;
+    background-color: black;
+    width: 55px;
+    height: 55px;
+    text-align: center;
+    border: 2px solid blanchedalmond;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+
+.rows{
+    text-align: center; 
+    
+}
+
+.letters{
+    text-align: center; 
+    width: 30px;
+    height: 30px;
+} 
+
+#keys1{
+    text-align: center;
+}
+
+#keys2{
+    text-align: center;
+}
+
+#keys3{
+    text-align: center;
+}
+
+.action{
+    text-align: center; 
+    width: 60px;
+    height: 30px;
+} 
+
+#keys4{
+    text-align: center;
+}
+
+#message{
+    color: blanchedalmond;
+    text-align: center; 
+}
+
+.green {
+    background-color: #6aaa64; /* Green */
+    color: white;
+}
+
+.yellow {
+    background-color: #c9b458; /* Yellow */
+    color: white;
+}
+
+.gray {
+    background-color: #787c7e; /* Gray */
+    color: white;
+}

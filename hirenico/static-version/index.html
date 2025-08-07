@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nico Portfolio | Masters of Software Development</title>
+    <meta name="description" content="Showcase of applications created during Masters of Software Development program">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="main-container">
+        <!-- Navigation -->
+        <div class="navigation">
+            <span class="nav-active">HOME</span>
+            <span class="nav-divider">/</span>
+            <a href="about.html" class="nav-link">ABOUT NICO</a>
+            <span class="nav-divider">/</span>
+            <a href="https://www.linkedin.com/in/nicolas-saldana-a095291b4/" target="_blank" rel="noopener noreferrer" class="nav-link">LINKEDIN</a>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="hero-section"></div>
+
+        <!-- Projects Grid -->
+        <div class="projects-container">
+            <!-- Row 1 - Three large tiles -->
+            <div class="projects-row">
+                <a href="#" onclick="showComingSoonPopup(); return false;" class="project-tile project-large">
+                    <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=400&fit=crop" alt="Mobile APP (coming soon)">
+                    <div class="project-overlay"></div>
+                    <div class="project-title">
+                        <h3>Mobile APP (coming soon)</h3>
+                    </div>
+                </a>
+                
+                <a href="https://special-potato-black.vercel.app" class="project-tile project-large" target="_blank" rel="noopener noreferrer">
+                    <img src="task-manager-screenshot.png" alt="Task Management App">
+                    <div class="project-overlay"></div>
+                    <div class="project-title">
+                        <h3>Task Management App</h3>
+                    </div>
+                </a>
+
+                <a href="apps/wordle/" class="project-tile project-medium">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&h=400&fit=crop" alt="Wordle Game (coming soon)">
+                    <div class="project-overlay"></div>
+                    <div class="project-title">
+                        <h3>Wordle Game</h3>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Row 2 - Three medium tiles -->
+            <div class="projects-row">
+                <a href="#" onclick="showComingSoonPopup(); return false;" class="project-tile project-medium">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&h=400&fit=crop" alt="Rock Paper Scissors (coming soon)">
+                    <div class="project-overlay"></div>
+                    <div class="project-title">
+                        <h3>Rock Paper Scissors (coming soon)</h3>
+                    </div>
+                </a>
+                
+                <a href="#" onclick="showComingSoonPopup(); return false;" class="project-tile project-medium">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&h=400&fit=crop" alt="Tick Tac Toe Game (coming soon)">
+                    <div class="project-overlay"></div>
+                    <div class="project-title">
+                        <h3>Tick Tac Toe Game (coming soon)</h3>
+                    </div>
+                </a>
+                
+                <a href="#" onclick="showComingSoonPopup(); return false;" class="project-tile project-medium">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&h=400&fit=crop" alt="WebSocket Game (coming soon)">
+                    <div class="project-overlay"></div>
+                    <div class="project-title">
+                        <h3>WebSocket Game (coming soon)</h3>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Row 3 - Two images + one text tile -->
+            <div class="projects-row">
+                <a href="#" onclick="showComingSoonPopup(); return false;" class="project-tile project-small">
+                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=400&fit=crop" alt="Music Player (coming soon)">
+                    <div class="project-overlay"></div>
+                    <div class="project-title">
+                        <h3>Music Player (coming soon)</h3>
+                    </div>
+                </a>
+                
+                <a href="#" onclick="showComingSoonPopup(); return false;" class="project-tile project-small">
+                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop" alt="Recipe App (coming soon)">
+                    <div class="project-overlay"></div>
+                    <div class="project-title">
+                        <h3>Recipe App (coming soon)</h3>
+                    </div>
+                </a>
+                
+                <!-- Text only tile -->
+                <div class="project-tile project-text">
+                    <div class="text-date">August 2025</div>
+                    <h3 class="text-title">MORE PROJECTS<br>COMING SOON</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-copyright">© 2025 NICO</div>
+            <div class="footer-subtitle">PORTFOLIO BY NICOLAS SALDANA</div>
+        </div>
+    </div>
+
+    <!-- Coming Soon Popup -->
+    <div id="comingSoonPopup" class="popup-overlay">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h3>🚀 Coming Soon!</h3>
+                <button class="popup-close" onclick="hideComingSoonPopup()">&times;</button>
+            </div>
+            <div class="popup-body">
+                <p>This project is currently in progress of being added.</p>
+                <p><strong>Come back soon</strong> to see the latest updates!</p>
+            </div>
+            <div class="popup-footer">
+                <button class="popup-btn" onclick="hideComingSoonPopup()">Got it!</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showComingSoonPopup() {
+            document.getElementById('comingSoonPopup').style.display = 'flex';
+        }
+
+        function hideComingSoonPopup() {
+            document.getElementById('comingSoonPopup').style.display = 'none';
+        }
+
+        // Close popup when clicking outside of it
+        document.getElementById('comingSoonPopup').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideComingSoonPopup();
+            }
+        });
+    </script>
+</body>
+</html>
