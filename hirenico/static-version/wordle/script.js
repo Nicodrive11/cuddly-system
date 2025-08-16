@@ -8,6 +8,7 @@ let realWords = [];
 let secretWord = "";
 let maxAttempts = 6;
 let attempts = 0;
+let mobileInput = null;
 
 // Answer words (potential secret words)
 const fallbackAnswerWords = [
@@ -146,7 +147,7 @@ function updateActiveTileIndicator() {
     }
 }
 
-// Initialize word lists - no API calls needed!
+// Initialize word lists
 function initializeWordLists() {
     allowedWords = fallbackAllowedWords;
     answerWords = fallbackAnswerWords;
@@ -161,7 +162,7 @@ function initializeWordLists() {
     console.log("Secret word:", secretWord);
 }
 
-// Initialize immediately - no async needed
+// Initialize immediately
 initializeWordLists();
 
 function rowOne(){ //creates row 1
@@ -257,107 +258,150 @@ function createBoard(){
     rowSix()
 }
 
-createBoard()
-// Start showing the cursor immediately after board is created
-updateActiveTileIndicator();
-
-// Auto-open mobile keyboard by creating and focusing a hidden input
-function openMobileKeyboard() {
-    // Create a hidden input field
-    const hiddenInput = document.createElement('input');
-    hiddenInput.type = 'text';
-    hiddenInput.style.position = 'absolute';
-    hiddenInput.style.left = '-9999px';
-    hiddenInput.style.opacity = '0';
-    hiddenInput.style.pointerEvents = 'none';
-    hiddenInput.setAttribute('readonly', true);
-    hiddenInput.setAttribute('autocomplete', 'off');
-    hiddenInput.setAttribute('autocorrect', 'off');
-    hiddenInput.setAttribute('autocapitalize', 'off');
-    hiddenInput.setAttribute('spellcheck', 'false');
-    
-    document.body.appendChild(hiddenInput);
-    
-    // Focus the hidden input to trigger mobile keyboard
-    setTimeout(() => {
-        hiddenInput.focus();
-        hiddenInput.click();
-        
-        // Remove the hidden input after a short delay
-        setTimeout(() => {
-            if (document.body.contains(hiddenInput)) {
-                document.body.removeChild(hiddenInput);
-            }
-        }, 1000);
-    }, 100);
-}
-
-// Detect mobile devices and auto-open keyboard
+// Detect mobile devices
 function isMobileDevice() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
            (navigator.maxTouchPoints && navigator.maxTouchPoints > 2 && /MacIntel/.test(navigator.platform));
 }
 
-// Auto-open keyboard on mobile devices
-if (isMobileDevice()) {
-    // Wait for the page to fully load
-    setTimeout(() => {
-        openMobileKeyboard();
-    }, 500);
+// Create persistent mobile input for reliable keyboard access
+function createMobileInput() {
+    if (mobileInput) return; // Already exists
     
-    // Also open keyboard when user taps anywhere on the game grid
-    document.addEventListener('click', function(event) {
-        // Check if click is on game area
-        const gameGrid = document.getElementById('gameGrid');
-        if (gameGrid && (gameGrid.contains(event.target) || event.target === gameGrid)) {
-            openMobileKeyboard();
+    mobileInput = document.createElement('input');
+    mobileInput.type = 'text';
+    mobileInput.id = 'mobile-input';
+    mobileInput.style.position = 'absolute';
+    mobileInput.style.top = '-9999px';
+    mobileInput.style.left = '-9999px';
+    mobileInput.style.opacity = '0';
+    mobileInput.style.pointerEvents = 'none';
+    mobileInput.style.width = '1px';
+    mobileInput.style.height = '1px';
+    mobileInput.setAttribute('autocomplete', 'off');
+    mobileInput.setAttribute('autocorrect', 'off');
+    mobileInput.setAttribute('autocapitalize', 'characters');
+    mobileInput.setAttribute('spellcheck', 'false');
+    mobileInput.setAttribute('maxlength', '1');
+    
+    document.body.appendChild(mobileInput);
+    
+    // Handle input events
+    mobileInput.addEventListener('input', function(e) {
+        const letter = e.target.value.toUpperCase();
+        if (letter && /[A-Z]/.test(letter)) {
+            handleLetterInput(letter);
+        }
+        // Clear the input for next character
+        setTimeout(() => {
+            if (mobileInput) mobileInput.value = '';
+        }, 10);
+    });
+    
+    // Handle backspace and enter through keydown on mobile input
+    mobileInput.addEventListener('keydown', function(e) {
+        e.stopPropagation(); // Prevent duplicate handling
+        
+        if (e.key === 'Backspace') {
+            handleBackspace();
+        } else if (e.key === 'Enter') {
+            handleEnter();
         }
     });
     
-    // Open keyboard when touching the game area
-    document.addEventListener('touchstart', function(event) {
-        const gameGrid = document.getElementById('gameGrid');
-        if (gameGrid && (gameGrid.contains(event.target) || event.target === gameGrid)) {
-            openMobileKeyboard();
-        }
+    // Keep focus on mobile input
+    mobileInput.addEventListener('blur', function() {
+        setTimeout(() => {
+            if (mobileInput && currentRow <= 6) {
+                mobileInput.focus();
+            }
+        }, 100);
     });
 }
 
-//updates dom and game array after every keyboard input
+// Focus mobile input
+function focusMobileInput() {
+    if (mobileInput && isMobileDevice()) {
+        setTimeout(() => {
+            mobileInput.focus();
+        }, 100);
+    }
+}
+
+// Game input handlers
+function handleLetterInput(letter) {
+    if (currentTileIndex < 5 && currentRow <= 6) {
+        updateActiveTile(letter);
+        messageTag.textContent = "";
+        if (currentTileIndex == 5 && currentRow <= 6) {
+            messageTag.textContent = "Enter Key to submit attempt";
+        }
+    }
+}
+
+function handleBackspace() {
+    if (currentTileIndex > 0) {
+        currentTileIndex--;
+        let currentTile = document.getElementById(`${currentRow}${currentTileIndex}`);
+        currentTile.textContent = "";
+        board[currentRow - 1][currentTileIndex] = "";
+        messageTag.textContent = "";
+        updateActiveTileIndicator();
+    }
+}
+
+function handleEnter() {
+    if (currentTileIndex == 5 && currentRow <= 6) {
+        let lineInput = (board[currentRow - 1].join("")).toLowerCase();
+        
+        if (realWords.includes(lineInput.toUpperCase()) == true) {
+            currentRow++;
+            currentTileIndex = 0;
+            messageTag.textContent = "";
+            attempts++;
+            gameLogic();
+            updateActiveTileIndicator();
+        } else {
+            messageTag.textContent = "Please enter a real word";
+        }
+    }
+}
+
+// Updates DOM and game array after every keyboard input
 function updateActiveTile(letter) {
     let currentTile = document.getElementById(`${currentRow}${currentTileIndex}`);
     if (currentTileIndex < 5) {
         currentTile.textContent = letter;
-        currentTileIndex++; // Move to the next tile
+        currentTileIndex++;
         board[currentRow - 1][currentTileIndex - 1] = letter;
-        updateActiveTileIndicator(); // Update the cursor position
+        updateActiveTileIndicator();
     }
 }
 
-//game logic
+// Game logic
 function gameLogic(){
-    let result = []; //blank array to store background color from game logic loop
+    let result = [];
     let secretArr = secretWord.split("");
-    let guessArr = board[currentRow - 2].slice(); // Copy of the guess
-    let secretCopy = secretWord.split(""); // Copy for tracking available letters
+    let guessArr = board[currentRow - 2].slice();
+    let secretCopy = secretWord.split("");
     
     // First pass: Mark exact matches (green)
     for(let i = 0; i < 5; i++) {
         if (guessArr[i] === secretArr[i]) {
             result[i] = "green";
-            secretCopy[i] = null; // Remove this letter from available pool
+            secretCopy[i] = null;
         } else {
-            result[i] = null; // Placeholder for now
+            result[i] = null;
         }
     }
     
     // Second pass: Mark letters in wrong position (yellow) and not in word (gray)
     for(let i = 0; i < 5; i++) {
-        if (result[i] === null) { // Only process non-green tiles
+        if (result[i] === null) {
             let letterIndex = secretCopy.indexOf(guessArr[i]);
             if (letterIndex !== -1) {
                 result[i] = "yellow";
-                secretCopy[letterIndex] = null; // Remove this letter from available pool
+                secretCopy[letterIndex] = null;
             } else {
                 result[i] = "gray";
             }
@@ -383,59 +427,95 @@ function gameLogic(){
     let guessWord = board[currentRow - 2].join("");
     if (guessWord === secretWord) {
         messageTag.textContent = "You guessed the correct word!";
-        currentRow = currentRow + 10; // End game
-        updateActiveTileIndicator(); // Remove cursor when game ends
+        currentRow = currentRow + 10;
+        updateActiveTileIndicator();
+        if (mobileInput) mobileInput.blur(); // Remove focus when game ends
     } else if (currentRow > 6) {
         messageTag.textContent = `Game over! The word was ${secretWord}`;
-        updateActiveTileIndicator(); // Remove cursor when game ends
+        updateActiveTileIndicator();
+        if (mobileInput) mobileInput.blur(); // Remove focus when game ends
     }
 
     return result;
 }
 
-//Keyboard inputs
+// Desktop keyboard inputs
 document.addEventListener("keydown", function (event) {
-
+    // Skip if the event came from mobile input to prevent duplicates
+    if (event.target === mobileInput) return;
+    
     if (event.keyCode == 8) {
         // backspace
-        if (currentTileIndex > 0) {
-            currentTileIndex--; // Move back to the previous tile
-            let currentTile = document.getElementById(`${currentRow}${currentTileIndex}`);
-            currentTile.textContent = ""; // Clear the tile content
-            board[currentRow - 1][currentTileIndex] = "";
-            messageTag.textContent = ""
-            updateActiveTileIndicator(); // Update cursor position
-        }
+        handleBackspace();
     } else if (event.keyCode >= 65 && event.keyCode <= 90) {
         // letters (A-Z)
-        if (currentTileIndex < 5) {
-            let letter = event.key.toUpperCase(); // Convert to uppercase
-            updateActiveTile(letter);
-            messageTag.textContent = ""
-            if (currentTileIndex == 5 && currentRow <= 6) {
-                messageTag.textContent = "Enter Key to submit attempt"
-            }
-        }
-    } 
-    
-    else if (event.keyCode == 13) {
-        // Enter key to move to the next row
-        if (currentTileIndex == 5 && currentRow <= 6) {
-            let lineInput = (board[currentRow - 1].join("")).toLowerCase();
-        // if (currentTileIndex == 5 && currentRow <= 6 && isRealWord == true) {
+        let letter = event.key.toUpperCase();
+        handleLetterInput(letter);
+    } else if (event.keyCode == 13) {
+        // Enter key
+        handleEnter();
+    }
+});
 
-            if (realWords.includes(lineInput.toUpperCase()) == true) {
-            currentRow++; // Move to the next row
-            currentTileIndex = 0; // Reset to the first tile in the new row
-            messageTag.textContent = ""
-            attempts ++
-            gameLogic()
-            updateActiveTileIndicator(); // Update cursor for new row
-            } 
-            else {
-            messageTag.textContent = "Please enter a real word"
+// Initialize the game
+createBoard();
+updateActiveTileIndicator();
+
+// Setup mobile support
+if (isMobileDevice()) {
+    createMobileInput();
+    
+    // Focus on mobile input when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        focusMobileInput();
+    });
+    
+    // Focus on mobile input when user interacts with game
+    document.addEventListener('click', function(event) {
+        const gameGrid = document.getElementById('gameGrid');
+        if (gameGrid && (gameGrid.contains(event.target) || event.target === gameGrid)) {
+            focusMobileInput();
+        }
+    });
+    
+    document.addEventListener('touchstart', function(event) {
+        const gameGrid = document.getElementById('gameGrid');
+        if (gameGrid && (gameGrid.contains(event.target) || event.target === gameGrid)) {
+            focusMobileInput();
+        }
+    });
+    
+    // Auto-focus after a short delay
+    setTimeout(focusMobileInput, 500);
+}
+
+// Add visual feedback for mobile users
+if (isMobileDevice()) {
+    // Update the initial message to be more mobile-friendly
+    setTimeout(() => {
+        if (messageTag.textContent === "Type a 5 letter word and press enter to play") {
+            messageTag.textContent = "Tap to start typing - Enter a 5 letter word";
+        }
+    }, 1000);
+}
+
+// Rules toggle functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const rulesToggle = document.getElementById('rulesToggle');
+    const rulesContent = document.getElementById('rulesContent');
+    
+    if (rulesToggle && rulesContent) {
+        rulesToggle.addEventListener('click', function() {
+            const isHidden = rulesContent.classList.contains('hidden');
+            
+            if (isHidden) {
+                rulesContent.classList.remove('hidden');
+                rulesToggle.textContent = 'Hide Rules';
+            } else {
+                rulesContent.classList.add('hidden');
+                rulesToggle.textContent = 'Show Rules';
             }
-        } 
+        });
     }
 });
 

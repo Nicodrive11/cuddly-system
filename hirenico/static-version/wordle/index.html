@@ -13,50 +13,26 @@
     </div>
     
     <h1>Tuph 5 Letdor Wurdz</h1>
-    <br>
+    <!-- <div>Goal: Guess the 5-letter word!</div> -->
     <br>
     <div id="gameGrid"></div>
     <br>
-    <br>
-    <!-- <div id="keys1">
-    <button class="letters" id="Q">Q</button>
-    <button class="letters" id="W">W</button>
-    <button class="letters" id="E">E</button>
-    <button class="letters" id="R">R</button>
-    <button class="letters" id="T">T</button>
-    <button class="letters" id="Y">Y</button>
-    <button class="letters" id="U">U</button>
-    <button class="letters" id="I">I</button>
-    <button class="letters" id="O">O</button>
-    <button class="letters" id="P">P</button>
-  </div>
-    <div id="keys2">
-    <button class="letters" id="A">A</button>
-    <button class="letters" id="S">S</button>
-    <button class="letters" id="D">D</button>
-    <button class="letters" id="F">F</button>
-    <button class="letters" id="G">G</button>
-    <button class="letters" id="H">H</button>
-    <button class="letters" id="J">J</button>
-    <button class="letters" id="K">K</button>
-    <button class="letters" id="L">L</button>
-  </div>
-  <div id="keys3">
-    <button class="letters" id="Z">Z</button>
-    <button class="letters" id="X">X</button>
-    <button class="letters" id="C">C</button>
-    <button class="letters" id="V">V</button>
-    <button class="letters" id="B">B</button>
-    <button class="letters" id="N">N</button>
-    <button class="letters" id="M">M</button>
-    <button class="action" id="">Delete</button>
-  </div>
-  <br>
-  <div id="keys4">
-
-    <button class="action" id="">Enter</button>
-  </div> -->
+    
     <div id="message">Type a 5 letter word and press enter to play</div>
+    <br>
+    <!-- Rules Section with Toggle -->
+    <div class="rules-section">
+        <button id="rulesToggle" class="rules-toggle-btn">Show Rules</button>
+        <div id="rulesContent" class="rules-content hidden">
+            <h3>How to Play:</h3>
+            <ul>
+                <li>You have 6 attempts to guess the 5 letter secret word</li>
+                <li>🟢 Green tiles indicate correct letters in the correct position.</li>
+                <li>🟡 Yellow tiles indicate correct letters in the wrong position.</li>
+                <li>⬜ Gray tiles indicate letters not in the word.</li>
+            </ul>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
