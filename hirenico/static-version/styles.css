@@ -207,14 +207,14 @@ body {
 }
 
 .about-card {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(137, 153, 175, 0.3);
     backdrop-filter: blur(4px);
     padding: 32px;
     border-radius: 22px;
 }
 
 .card-title {
-    color: #111827;
+    color: #a7b1c0;
     font-size: 24px;
     font-weight: 600;
     margin-bottom: 24px;
@@ -222,7 +222,7 @@ body {
 }
 
 .card-content {
-    color: #374151;
+    color: #c0c5cd;
     line-height: 1.6;
 }
 
@@ -237,7 +237,7 @@ body {
 }
 
 .skill-category-title {
-    color: #1f2937;
+    color: #c0c5cd;
     font-weight: 500;
     margin-bottom: 8px;
 }
@@ -251,7 +251,7 @@ body {
 .skill-tag {
     padding: 4px 12px;
     background: #f3f4f6;
-    color: #374151;
+    /* color: #a7b1c0; */
     font-size: 14px;
     border-radius: 8px;
 }
