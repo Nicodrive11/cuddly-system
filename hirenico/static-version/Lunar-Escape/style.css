@@ -1,0 +1,19 @@
+@import url(https://fonts.googleapis.com/css?family=Orbitron);
+
+html {
+    background-color: black;
+}
+
+img {
+    width: 100px;
+    border-radius: 5%;
+}
+
+body {
+    /* text-align: right; */
+    font-family: 'Orbitron';
+    font-size: 16px;
+    color: aliceblue;
+
+    /* margin: auto; */
+}

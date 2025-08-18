@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="multiplayer.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    <title>ANS Music Player</title>
+  </head>
+
+  <body>
+    <header>
+      <h1>Of Sapce and Time Music Player</h1>
+    </header>
+
+    <div id="content">
+      <div id="tracks">
+        <h6>Song Que:</h6>
+        <div class="song-collection-container">
+          <ol id="song-collection">
+          </ol>
+        </div>
+        <!-- <span id="firstTrack">
+          <span id="T1">Track 1</span>
+          <button id="trackOne" value="0">
+            <span id="songName">Song: ALC</span><br>
+            <span id="artistName">Artist: Of Space and Time</span><br>
+            <span id="albumName">Album: Wish I was here</span>
+          </button>
+        </span> -->
+
+        <!-- <span id="secondTrack">
+          <span id="T2">Track 2</span>
+          <button id="trackTwo" value="1">
+            <span id="songName">Song: Seinfeld</span><br>
+            <span id="artistName">Artist: Of Space and Time</span><br>
+            <span id="albumName">Album: Wish I was here</span>
+          </button>
+        </span> -->
+                
+        <!-- <span id="thirdTrack">
+          <span id="T3">Track 3</span>
+          <button id="trackThree" value="2">
+            <span id="songName">Song: Space Age</span><br>
+            <span id="artistName">Artist: Of Space and Time</span><br>
+            <span id="albumName">Album: Wish I was here</span>
+          </button>
+        </span> -->
+
+        <!-- <span id="fourhtTrack">
+          <span id="T4">Track 4</span>
+          <button id="trackFour" value="4">
+            <span id="songName">Song: Livingroom Sample</span><br>
+            <span id="artistName">Artist: Of Space and Time</span><br>
+            <span id="albumName">Album: Wish I was here</span>
+          </button>
+        </span> -->
+
+        <!-- <span id="fifthTrack">
+          <span id="T5">Track 5</span>
+          <button id="trackFive" value="5">
+            <span id="songName">Song: Sample 2</span><br>
+            <span id="artistName">Artist: Of Space and Time</span><br>
+            <span id="albumName">Album: Wish I was here</span>
+          </button>
+        </span> -->
+        <br>
+      </div>
+
+      <div id="parent">
+        <span id="Song-info">
+          <img id="albumArt" src="addie_in_space.png" alt="album logo"/>
+          <h2 id="songInfo">Song:</h2>
+          <h4 id="artistInfo">Artist:</h4>
+          <h5 id="albumInfo">Album:</h5>
+        </span>
+
+        <span>
+          <span id="time">0:00</span>
+          <progress id="song_time" value="0" max="1"></progress>
+          <span id="endTime">0:00</span><br>
+              <!-- track one = 1:36 -->
+              <!-- track two = 2:22 -->
+              <!-- track three = 3:13 -->
+<br>
+          <button id="back" value="0">&#x23EE;</button>
+          <button id="play" value="0">&#x25B6;</button>
+          <button id="forward" value="0">&#x23ED;</button>
+        </span>
+
+        <br>
+
+        <span id="Volume">Volume<br>
+          <button id="vDown">&#x1F509;</button>
+          <progress id="volume" value="5" max="10"></progress>
+          <button id="volume_up">&#x1F50A;</button>
+          <h3 id="volumeStatus"></h3>
+        </span>
+        <br>
+        <h7> About the Artist: Of Space and Time is Nico Saldana's solo project.
+          Nico was part of groups I, Columbus and Vanuata with band mates Spanky Collins and John Garcia which were
+          heavily influneced by sync pop emo genres. Nico has always been motivated by music as a form of self expression.
+          the name Of Space of Time was influenced by a song by City and Colour but aslo by Nico's fasination of physics,
+          engineering, space exploration and the idea that life itself is only possible by infinite and arbitrary space and time.
+
+          <br>
+          <br>
+          Origin: Austin, TX 
+          <br>
+          Formed: 2021</h7>
+      </div>
+    </div>
+
+      <audio id="audioPlayer" src=""></audio>
+
+    <script src="arrayplayer.js"></script>
+  </body>
+</html>
