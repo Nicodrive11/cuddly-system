@@ -1,5 +1,6 @@
 body{
     background-color: black;
+    color: blanchedalmond; /* Add default text color for all content */
 }
 
 /* Home Button Styles */
@@ -36,6 +37,83 @@ h1{
     color: blanchedalmond;
     margin-top: 80px; /* Add top margin to prevent overlap with home button */
     margin-bottom: 20px;
+}
+
+h2{
+    text-align: center;  
+    color: blanchedalmond;
+    margin-top: 80px; /* Add top margin to prevent overlap with home button */
+    margin-bottom: 20px;
+}
+
+/* Style for the goal and rules text */
+body > div {
+    color: blanchedalmond;
+    text-align: center;
+    margin: 10px auto;
+    max-width: 600px;
+    padding: 0 20px;
+}
+
+/* Rules Section Styles */
+.rules-section {
+    text-align: center;
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 0 20px;
+}
+
+.rules-toggle-btn {
+    background-color: rgba(255, 235, 205, 0.1);
+    border: 2px solid blanchedalmond;
+    color: blanchedalmond;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    margin-bottom: 15px;
+}
+
+.rules-toggle-btn:hover {
+    background-color: rgba(255, 235, 205, 0.2);
+    border-color: white;
+    color: white;
+    transform: translateY(-1px);
+}
+
+.rules-content {
+    background-color: rgba(255, 235, 205, 0.05);
+    border: 1px solid rgba(255, 235, 205, 0.3);
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+}
+
+.rules-content.hidden {
+    display: none;
+}
+
+.rules-content h3 {
+    color: blanchedalmond;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+/* Style for lists */
+ul {
+    text-align: left;
+    margin: 15px auto;
+    max-width: 500px;
+    padding-left: 20px;
+}
+
+li {
+    color: blanchedalmond;
+    margin-bottom: 8px;
+    line-height: 1.4;
 }
 
 input{
@@ -227,10 +305,44 @@ button{
         font-size: 1.5rem;
     }
     
+    h2 {
+        margin-top: 70px;
+        font-size: 1.3rem;
+    }
+    
     .ten, .twenty, .thirty, .fourty, .fitty, .sixty {
         width: 45px;
         height: 45px;
         font-size: 18px;
+    }
+    
+    /* Rules section mobile styles */
+    .rules-section {
+        padding: 0 15px;
+    }
+    
+    .rules-toggle-btn {
+        font-size: 13px;
+        padding: 8px 16px;
+    }
+    
+    .rules-content {
+        padding: 15px;
+    }
+    
+    .rules-content h3 {
+        font-size: 16px;
+    }
+    
+    /* Make text more readable on mobile */
+    body > div {
+        font-size: 14px;
+        padding: 0 15px;
+    }
+    
+    ul {
+        font-size: 13px;
+        max-width: 300px;
     }
 }
 
@@ -251,6 +363,12 @@ button{
         padding: 0 10px;
     }
     
+    h2 {
+        margin-top: 60px;
+        font-size: 1.1rem;
+        padding: 0 10px;
+    }
+    
     .ten, .twenty, .thirty, .fourty, .fitty, .sixty {
         width: 40px;
         height: 40px;
@@ -260,5 +378,40 @@ button{
     
     .rows {
         gap: 2px;
+    }
+    
+    /* Rules section mobile styles for small screens */
+    .rules-section {
+        padding: 0 10px;
+    }
+    
+    .rules-toggle-btn {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+    
+    .rules-content {
+        padding: 12px;
+    }
+    
+    .rules-content h3 {
+        font-size: 14px;
+    }
+    
+    /* More compact text on small screens */
+    body > div {
+        font-size: 12px;
+        padding: 0 10px;
+        margin: 8px auto;
+    }
+    
+    ul {
+        font-size: 11px;
+        max-width: 280px;
+        padding-left: 15px;
+    }
+    
+    li {
+        margin-bottom: 6px;
     }
 }
